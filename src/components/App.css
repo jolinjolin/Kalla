@@ -1,0 +1,29 @@
+html,
+body,
+.app {
+    height: 100vh;
+    background: rgb(238, 238, 238);
+    padding: 1em;
+}
+.menu {
+    padding-bottom: 2em;
+}
+.message {
+    height: 450px;
+    overflow-y: scroll;
+}
+.messages-form {
+    position: fiexed !important;
+    bottom: 1em;
+    /* margin-left: 320px !important; */
+    left: 0;
+    right: 1em;
+    z-index: 200;
+}
+.message-self {
+    border-left: 2px solid purple;
+    padding-left: 8px;
+}
+.message-image {
+    padding: 1em;
+}
