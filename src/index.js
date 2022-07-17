@@ -19,20 +19,20 @@ const store = createStore(rootReducer, composeWithDevTools());
 class Root extends React.Component {
     componentDidMount() {
         firebase
-        .auth()
-        .onAuthStateChanged(user => {
-            if (user) {
-                this.props.setUser(user);
-                this.props.history.push('/')
-            }
-            else {
-                this.props.clearUser();
-                this.props.history.push('/login');
-            }
-        });
+            .auth()
+            .onAuthStateChanged(user => {
+                if (user) {
+                    this.props.setUser(user);
+                    this.props.history.push('/')
+                }
+                else {
+                    this.props.clearUser();
+                    this.props.history.push('/login');
+                }
+            });
     }
     render() {
-        return this.props.isLoading? <Spinner /> : (
+        return this.props.isLoading ? <Spinner /> : (
             <Switch>
                 <Route exact path="/" component={App} />
                 <Route path="/login" component={Login} />
@@ -50,14 +50,14 @@ const RootWithAuth = withRouter(
     connect(
         mapStateFromProps,
         { setUser, clearUser }
-        )(Root)
-    );
+    )(Root)
+);
 
 ReactDOM.render(
     <Provider store={store}>
-    <Router>
-        <RootWithAuth />
-    </Router>
+        <Router>
+            <RootWithAuth />
+        </Router>
     </Provider>,
     document.getElementById("root"));
 registerServiceWorker();

@@ -107,10 +107,10 @@ class Channels extends React.Component {
                 style={{ opacity: 0.7 }}
                 active={el.id === this.state.activeId}
             >
-            {this.getNotificationCount(el) &&
-            <Label color="red">{this.getNotificationCount(el)}</Label>
-            }
-            # {el.name}
+                {this.getNotificationCount(el) &&
+                    <Label color="red">{this.getNotificationCount(el)}</Label>
+                }
+                # {el.name}
             </Menu.Item>
         ))
     setFirstChannel = () => {
@@ -168,7 +168,7 @@ class Channels extends React.Component {
     };
     clearNotications = (channel) => {
         let index = this.state.notifications.findIndex(el => el.id === this.state.channel.id)
-        if(index !== -1) {
+        if (index !== -1) {
             let notifications = [...this.state.notifications];
             notifications[index].total = this.state.notifications[index].lastKnownTotal;
             notifications[index].count = 0;
@@ -180,12 +180,12 @@ class Channels extends React.Component {
     getNotificationCount = (channel) => {
         let count = 0;
         this.state.notifications.forEach(el => {
-            if(el.id === channel.id) {
+            if (el.id === channel.id) {
                 count = el.count;
 
             }
         });
-        if(count > 0) {
+        if (count > 0) {
             return count;
         }
     };

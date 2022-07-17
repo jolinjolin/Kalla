@@ -7,8 +7,8 @@ const initialUserState = {
     userPosts: null,
 };
 
-const user_reducer  = (state = initialUserState, action) => {
-    switch(action.type) {
+const user_reducer = (state = initialUserState, action) => {
+    switch (action.type) {
         case actionTypes.SET_USER:
             return {
                 currentUser: action.payload.currentUser,
@@ -45,11 +45,11 @@ const channel_reducer = (state = initialChannelState, action) => {
             return {
                 ...state,
                 userPosts: action.payload.userPosts
-            };   
-      default:
-        return state;
+            };
+        default:
+            return state;
     }
-  };
+};
 
 const rootReducer = combineReducers({
     user: user_reducer,

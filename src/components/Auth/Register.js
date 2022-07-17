@@ -54,7 +54,7 @@ class Register extends React.Component {
             return true;
         }
     };
-    saveUser =  createUser => {
+    saveUser = createUser => {
         return this.state.usersRef.child(createUser.user.uid).set({
             name: createUser.user.displayName,
             avatar: createUser.user.photoURL,

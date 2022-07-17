@@ -16,7 +16,7 @@ class Login extends React.Component {
     handleInputError = (errors, input) => {
         return errors.some(error => error.message.toLowerCase().includes(input)) ? 'error' : '';
     };
-    formValid = ({email, password}) => email && password;
+    formValid = ({ email, password }) => email && password;
 
     showErrors = errors => errors.map((error, index) => <p key={index}>{error.message}</p>)
 
@@ -25,15 +25,15 @@ class Login extends React.Component {
             this.setState({ erros: [], loading: true });
             event.preventDefault();
             firebase
-            .auth()
-            .signInWithEmailAndPassword(this.state.email, this.state.password)
-            .then((signedInUser) => {
-                // console.log(signedInUser)
-            })
-            .catch((error) => {
-                console.log(error);
-                this.setState({ errors: this.state.errors.concat(error), loading: false });
-            })
+                .auth()
+                .signInWithEmailAndPassword(this.state.email, this.state.password)
+                .then((signedInUser) => {
+                    // console.log(signedInUser)
+                })
+                .catch((error) => {
+                    console.log(error);
+                    this.setState({ errors: this.state.errors.concat(error), loading: false });
+                })
         }
     }
 

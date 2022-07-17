@@ -7,12 +7,12 @@ import MessagePanel from './MessagePanel/MessagePanel';
 import MetaPanel from './MetaPanel/MetaPanel';
 import { connect } from 'react-redux';
 
-const App = ({currentUser, currentChannel, isPrivateChannel, userPosts}) => (
+const App = ({ currentUser, currentChannel, isPrivateChannel, userPosts }) => (
   <Grid columns="equal" className="app" style={{ background: '#eee' }}>
     <ColorPanel />
-    <SidePanel 
-    key={currentUser && currentUser.uid}
-    currentUser={currentUser}
+    <SidePanel
+      key={currentUser && currentUser.uid}
+      currentUser={currentUser}
     />
     <Grid.Column style={{ marginLeft: 320 }}>
       <MessagePanel

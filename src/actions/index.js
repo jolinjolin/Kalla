@@ -2,7 +2,7 @@ import * as actionTypes from './types';
 
 //user
 export const setUser = (user) => {
-    return  {
+    return {
         type: actionTypes.SET_USER,
         payload: {
             currentUser: user,
@@ -10,38 +10,38 @@ export const setUser = (user) => {
     }
 }
 export const clearUser = () => {
-    return  {
+    return {
         type: actionTypes.CLEAR_USER,
-        
+
     }
 }
 
 //channel
 export const setCurrentChannel = (channel) => {
-    return  {
+    return {
         type: actionTypes.SET_CURRENT_CHANNEL,
         payload: {
             currentChannel: channel
         }
-        
+
     }
 }
 export const setPrivateChannel = (isPrivateChannel) => {
-    return  {
+    return {
         type: actionTypes.SET_PRIVATE_CHANNEL,
         payload: {
             isPrivateChannel
         }
-        
+
     }
 }
 
 export const setUserPosts = (userPosts) => {
-    return  {
+    return {
         type: actionTypes.SET_USER_POSTS,
         payload: {
             userPosts
         }
-        
+
     }
 }

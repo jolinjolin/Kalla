@@ -8,7 +8,7 @@ import { connect } from 'react-redux';
 import { setUserPosts } from '../../actions'
 
 class MessagePanel extends React.Component {
-    state= {
+    state = {
         messagesRef: firebase.database().ref('messages'),
         channel: this.props.currentChannel,
         user: this.props.currentUser,
@@ -24,22 +24,22 @@ class MessagePanel extends React.Component {
         listeners: [],
     };
     componentDidMount() {
-        const {channel, user, listeners} = this.state;
-        if(channel && user) {
+        const { channel, user, listeners } = this.state;
+        if (channel && user) {
             this.removeListeners(listeners);
             this.addEventListener(channel.id);
         }
     };
     componentWillUnmount() {
-       this.removeListeners(this.state.listeners);
-    //    this.state.connectedRef.off();
+        this.removeListeners(this.state.listeners);
+        //    this.state.connectedRef.off();
     };
     addToListeners = (id, ref, event) => {
-        const index = this.state.listeners.findIndex(el => 
-                el.id === id && el.ref === ref && el.event === event
-            )
-        if(index === -1) {
-            const newListener = {id, ref, event};
+        const index = this.state.listeners.findIndex(el =>
+            el.id === id && el.ref === ref && el.event === event
+        )
+        if (index === -1) {
+            const newListener = { id, ref, event };
             this.setState({
                 listeners: this.state.listeners.concat(newListener)
             });
@@ -69,20 +69,20 @@ class MessagePanel extends React.Component {
     };
     uniqueUser = (messages) => {
         const users = messages.reduce((acc, message) => {
-            if(!acc.includes(message.user.name)) {
+            if (!acc.includes(message.user.name)) {
                 acc.push(message.user.name);
             }
             return acc;
         }, []);
         const isMultiple = users.length > 1 || users.length === 0;
-        const numUniqueUsers = `${users.length} user${isMultiple? 's' : ''}`;
+        const numUniqueUsers = `${users.length} user${isMultiple ? 's' : ''}`;
         this.setState({
             numUniqueUsers
         })
     };
     userPosts = (messages) => {
         let userPosts = messages.reduce((acc, message) => {
-            if(message.user.name in acc) {
+            if (message.user.name in acc) {
                 acc[message.user.name].count += 1;
             }
             else {
@@ -97,32 +97,32 @@ class MessagePanel extends React.Component {
     };
     displayMessages = messages =>
         messages.length > 0 && messages.map(el => (
-        <Message
-            key={el.timeStamp}
-            message={el}
-            user={this.state.user}
-        />
-    ));
+            <Message
+                key={el.timeStamp}
+                message={el}
+                user={this.state.user}
+            />
+        ));
     displayChannelName = (channel) => {
         return channel
-        ? `${this.state.privateChannel ? "@" : "#"}${channel.name}`
-        : "";
+            ? `${this.state.privateChannel ? "@" : "#"}${channel.name}`
+            : "";
     }
     handleSearch = () => {
         const channelMessages = [...this.state.messages];
         const regex = new RegExp(this.state.searchTerm, 'gi');
-        const searchRes= channelMessages.reduce((acc, message) => {
-            if((message.content && message.content.match(regex)) || message.user.name.match(regex)) {
+        const searchRes = channelMessages.reduce((acc, message) => {
+            if ((message.content && message.content.match(regex)) || message.user.name.match(regex)) {
                 acc.push(message);
             }
             return acc;
         }, []);
-        this.setState({searchRes});
+        this.setState({ searchRes });
         setTimeout(() => {
-            this.setState({searchIsLoading: false});
+            this.setState({ searchIsLoading: false });
         }, 1000);
     };
-    searchMsg = (event) =>{
+    searchMsg = (event) => {
         this.setState({
             searchTerm: event.target.value,
             searchIsLoading: true,
@@ -132,31 +132,31 @@ class MessagePanel extends React.Component {
     };
     getMessagesRef = () => {
         const { messagesRef, privateMessagesRef, privateChannel } = this.state;
-        return privateChannel? privateMessagesRef : messagesRef;
+        return privateChannel ? privateMessagesRef : messagesRef;
     };
 
     render() {
         const { messagesRef, channel, user, messages, numUniqueUsers, searchTerm, searchRes, searchIsLoading, privateChannel } = this.state;
         return (
             <React.Fragment>
-                <MessagesHeader 
-                channelName={this.displayChannelName(channel)}
-                numUniqueUsers={numUniqueUsers}
-                searchMsg={this.searchMsg}
-                searchIsLoading={searchIsLoading}
-                isPrivateChannel={privateChannel}
+                <MessagesHeader
+                    channelName={this.displayChannelName(channel)}
+                    numUniqueUsers={numUniqueUsers}
+                    searchMsg={this.searchMsg}
+                    searchIsLoading={searchIsLoading}
+                    isPrivateChannel={privateChannel}
                 />
-                    <Segment>
-                        <Comment.Group className="message">
-                            {searchTerm? this.displayMessages(searchRes) : this.displayMessages(messages)}
-                        </Comment.Group>
-                    </Segment>
+                <Segment>
+                    <Comment.Group className="message">
+                        {searchTerm ? this.displayMessages(searchRes) : this.displayMessages(messages)}
+                    </Comment.Group>
+                </Segment>
                 <MessagesForm
-                messagesRef={messagesRef}
-                currentChannel={channel}
-                currentUser={user}
-                isPrivateChannel={privateChannel}
-                getMessagesRef={this.getMessagesRef}
+                    messagesRef={messagesRef}
+                    currentChannel={channel}
+                    currentUser={user}
+                    isPrivateChannel={privateChannel}
+                    getMessagesRef={this.getMessagesRef}
                 />
             </React.Fragment>
         )
